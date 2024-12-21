@@ -459,3 +459,6 @@ if (isMobileDevice()) {
     }
   });
 }
+document.oncontextmenu = function() {
+    return false;
+}
