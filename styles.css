@@ -1,0 +1,326 @@
+html, body {
+    height: 100%; /* تأكيد أن الـ body يمتد على كامل ارتفاع النافذة */
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex; /* لتوزيع المحتوى بشكل صحيح */
+    flex-direction: column; /* توجيه العناصر عموديًا */
+  }
+ 
+main {
+  flex: 1; /* تمدد تلقائي لملء المساحة */
+}
+  
+header, footer {
+  flex-shrink: 0; /* يمنع تقليص الهيدر أو الفوتر ليحافظ على حجم ثابت */
+}
+
+
+
+  .navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #categories button {
+    flex: 1;
+    margin: 0 5px;
+  }
+  
+  #product-list .card {
+    margin-bottom: 20px;
+  }
+  
+  #cart-btn {
+    display: flex;
+    align-items: center;
+  }
+  
+  .modal-header {
+    display: flex; /* استخدام Flexbox لضمان المحاذاة */
+    justify-content: center; /* توسيط جميع العناصر أفقيًا */
+    align-items: center; /* محاذاة العناصر عموديًا */
+    position: relative; /* السماح بزر الإغلاق أن يكون بجانب العنوان */
+  }
+  
+  .modal-header .btn-close {
+    position: absolute; /* وضع زر الإغلاق في الطرف الأيمن */
+    right: 10px;
+    top: 10px;
+  }
+  
+
+  .modal img {
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .modal-footer {
+    display: flex; /* استخدام Flexbox لتنسيق المحتوى */
+    justify-content: center; /* محاذاة العناصر إلى المنتصف */
+  }
+  
+  .modal-footer .btn {
+    width: 80%; /* ضبط عرض الزر */
+  }
+  
+  .modal-footer .btn:hover {
+    background-color: #064224; /* لون مختلف عند التمرير */
+    transform: scale(1.05); /* تكبير بسيط عند التمرير */
+    transition: all 0.2s ease;
+  }
+  
+
+  .card {
+    cursor: pointer; /* مؤشر يد للإشارة إلى أن البطاقة قابلة للنقر */
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.02); /* تكبير بسيط عند المرور */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+
+.card-title {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .card-text {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+  }
+  
+  /* تنسيق عام */
+  .container {
+    margin-top: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .card .btn {
+    display: block; /* يجعل الزر يأخذ صفًا منفصلًا */
+    margin: 10px auto; /* محاذاة الزر إلى المنتصف مع تباعد من الأعلى والأسفل */
+    width: 80%; /* تحديد عرض الزر بالنسبة لعرض البطاقة */
+    text-align: center; /* يجعل النص في منتصف الزر */
+  }
+  
+
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .btn-primary {
+    background-color: #0f421c;
+    border-color: #0f421c;
+    font-weight: bold;
+  }
+
+  .btn-primary:hover {
+    background-color: #08c77e;
+  }
+  
+  /* تحسين الصور */
+  .card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .carousel-inner img {
+    height: 300px;
+    object-fit: cover;
+  }
+/* تحسين شكل أيقونة عدد المنتجات */
+.badge-circle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  min-width: 25px;
+  text-align: center;
+}
+
+
+/* جعل الصور مربعة الشكل */
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* تحسين شكل العداد */
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#increase-quantity,
+#decrease-quantity {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 8px; /* زوايا دائرية */
+  background-color: #006400; /* لون الخلفية (أخضر غامق) */
+}
+
+#product-quantity {
+  max-width: 60px;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* تحسين شكل الشارة */
+.badge-circle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+/* تحسين قائمة التصنيفات */
+#categories {
+  display: flex; /* جعل العناصر داخل التصنيفات في صف واحد */
+  overflow-x: auto; /* تمكين التمرير الأفقي */
+  white-space: nowrap; /* منع العناصر من الانتقال إلى الصف التالي */
+  -webkit-overflow-scrolling: touch; /* تحسين تجربة التمرير على الأجهزة المحمولة */
+  gap: 10px; /* مسافة بين الأزرار */
+  padding-bottom: 10px; /* إضافة مساحة صغيرة تحت التصنيفات */
+  scroll-behavior: smooth; /* حركة سلسة أثناء التمرير */
+}
+
+.btn-outline-primary:hover{
+  background-color: #28a745;
+}
+
+#categories button {
+  flex: 0 0 auto; /* منع الأزرار من التمدد */
+  min-width: 175px; /* تحديد عرض افتراضي للأزرار */
+  text-align: center;
+  font-weight: bold;
+  border-color: #0f421c;
+  color: #000000;
+}
+
+#categories::-webkit-scrollbar {
+  height: 8px; /* حجم الشريط على المتصفح */
+}
+
+#categories::-webkit-scrollbar-thumb {
+  background: #033118; /* لون الشريط */
+  border-radius: 4px; /* زوايا دائرية للشريط */
+}
+
+#categories i {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+/* تحسين تصميم ملخص الطلب */
+#checkout-summary {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkout-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.checkout-item h6 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.checkout-item p {
+  margin: 0;
+}
+.fixed-cart-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#fixed-cart-btn {
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  padding: 7px;
+  background-color: #115663; /* اللون الأخضر */
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0; /* لإزالة الحواف الدائرية */
+}
+
+#fixed-cart-btn:hover {
+  background-color: #b4df3f; /* لون عند التمرير */
+}
+/* تحسين مظهر خيارات الدفع */
+.form-check {
+  margin-bottom: 10px;
+}
+
+.form-check-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.footer {
+  background-color: #f8f9fa; /* لون خلفية الفوتر */
+  color: #333; /* لون النص */
+  font-size: 14px; /* حجم النص */
+  border-top: 1px solid #ddd; /* خط أعلى الفوتر */
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer p {
+  margin: 0; /* إزالة المسافات العلوية والسفلية */
+  padding-bottom: 20px;
+}
+
+.footer strong {
+  color: #007bff; /* لون مميز لاسم المصمم */
+  font-weight: bold;
+}
+
+.footer strong:hover {
+  text-decoration: underline; /* تأثير عند تمرير الماوس */
+}
+.hidden {
+  display: none !important; /* إخفاء العناصر بالكامل */
+}
