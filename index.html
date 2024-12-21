@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>المتجر الإلكتروني</title>
+  <!-- إضافة Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- شريط التنقل -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" onclick="location.reload()">🛒 المتجر الإلكتروني</a>
+      <button class="btn btn-primary position-relative" id="cart-btn" onclick="showCartPage()">
+        عربة التسوق
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span>
+      </button>
+      
+    </div>
+  </nav>
+
+  <!-- مربع البحث -->
+  <div class="container mt-4">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id="search-box" placeholder="ابحث عن منتج...">
+      <button class="btn btn-outline-secondary" id="search-btn" style="border-radius: 8px;">🔍</button>
+    </div>
+    <!-- قائمة التصنيفات -->
+
+    <div class="d-flex justify-content-between my-3" id="categories" style="height: 80px;">
+      <button class="btn btn-outline-primary" onclick="filterByCategory('')">كل المنتجات</button>
+      <button class="btn btn-outline-primary" onclick="filterByCategory('خضراوات')">خضراوات</button>
+      <button class="btn btn-outline-primary" onclick="filterByCategory('فواكهه')">فواكهه</button>
+      <button class="btn btn-outline-primary" onclick="filterByCategory('عروض حصرية')">عروض حصرية</button>
+      <button class="btn btn-outline-primary" onclick="filterByCategory('جديد')">جديد</button>
+  </div>
+  
+    <!-- عرض المنتجات -->
+    <div class="row" id="product-list">
+      <!-- المنتجات ستُضاف ديناميكيًا هنا -->
+    </div>
+  </div>
+
+  <!-- زر عربة التسوق مثبت -->
+  <div class="fixed-cart-container">
+    <button class="btn btn-success w-100" id="fixed-cart-btn" onclick="showCheckoutPage()">
+        <span id="cart-total">إجمالي السعر: 0.00 جنيه</span> - الدفع
+    </button>
+</div>
+
+
+<!-- نافذة المنتج -->
+  <div class="modal fade" id="product-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="product-title"></h5>
+            </div>
+            <div class="modal-body">
+                <div id="product-images-carousel" class="carousel slide mx-auto" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="product-images"></div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#product-images-carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#product-images-carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+                <p id="product-description" class="mt-3"></p>
+                <p>السعر: <span id="product-price"></span> جنيه</p>
+                <div class="input-group mb-3">
+                    <button class="btn btn-secondary" id="decrease-quantity">-</button>
+                    <input type="text" class="form-control text-center" id="product-quantity" value="1" readonly>
+                    <button class="btn btn-secondary" id="increase-quantity">+</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="add-to-cart">إضافة إلى السلة</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end-->
+  <!-- صفحات إضافية -->
+  <div class="container mt-4" id="cart-page" style="display: none;">
+    <h3>🛒 عربة التسوق</h3>
+    <div id="cart-items"></div>
+    <button class="btn btn-success" onclick="showCheckoutPage()">إتمام الطلب</button>
+    <button class="btn btn-secondary" onclick="goBack()">رجوع</button>
+  </div>
+
+  <div class="container mt-4" id="checkout-page" style="display: none;">
+    <h3>إتمام الطلب</h3>
+
+    <div id="checkout-summary" class="mb-4"></div>
+
+
+    <form id="checkout-form">
+      <div class="mb-3">
+        <label for="name" class="form-label">الاسم:</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">رقم الهاتف:</label>
+        <input type="text" class="form-control" id="phone" required>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">العنوان:</label>
+        <textarea class="form-control" id="address" rows="3" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">طريقة الدفع:</label>
+        <div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment-method" id="payment-cash" value="cash" required>
+            <label class="form-check-label" for="payment-cash">الدفع عند الاستلام</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment-method" id="payment-online" value="online">
+            <label class="form-check-label" for="payment-online">الدفع عبر الإنترنت</label>
+          </div>
+        </div>
+      </div>
+      
+
+      <button type="submit" class="btn btn-primary">إتمام الطلب</button>
+      <button type="button" class="btn btn-secondary" onclick="goBack()">رجوع</button>
+    </form>
+  </div>
+
+  <footer class="footer bg-light text-center py-3">
+    <div class="container">
+      <p class="mb-0">جميع الحقوق محفوظة © 2024</p>
+      <p class="mb-0">تصميم بواسطة <strong>Ahmed Yahia</strong></p>
+    </div>
+  </footer>
+  
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  </script>  
+</body>
+</html>
